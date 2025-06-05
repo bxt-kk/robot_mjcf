@@ -14,6 +14,7 @@ def display(
         attach:        str='',
         inertia:       bool=False,
         contact_force: bool=False,
+        show_camera:   bool=False,
         camera:        int | str=-1,
         render_size:   tuple[int, int]=(640, 360),
         depthes:       tuple[float, float, float]=(9., 3., 1.),
@@ -23,13 +24,13 @@ def display(
 
     attaches = [s.strip() for s in attach.split(',')]
     attaches = [s for s in attaches if s]
-    for i, pattern in enumerate(attaches):
+    for pattern in attaches:
         body_path, body_name, site_name = pattern.split(':')
         child:mujoco.MjSpec = mujoco.MjSpec.from_file(body_path)
         efg_main = child.find_body(body_name)
         site:mujoco.MjsSite = parent.find_site(site_name)
 
-        site.attach_body(efg_main, prefix=f'_EXT4ATC{i:>02}_')
+        site.attach_body(efg_main, prefix=f'{site_name}-')
 
     m = parent.compile()
     d = mujoco.MjData(m)
@@ -84,6 +85,7 @@ def display(
         viewer.user_scn.flags[mujoco.mjtRndFlag.mjRND_HAZE] = False
         viewer.opt.flags[mujoco.mjtVisFlag.mjVIS_INERTIA] = inertia
         viewer.opt.flags[mujoco.mjtVisFlag.mjVIS_CONTACTFORCE] = contact_force
+        viewer.opt.flags[mujoco.mjtVisFlag.mjVIS_CAMERA] = show_camera
 
         viewer.sync()
         while viewer.is_running():
