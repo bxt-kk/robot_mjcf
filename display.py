@@ -27,8 +27,8 @@ def display(
     for pattern in attaches:
         body_path, body_name, site_name = pattern.split(':')
         child:mujoco.MjSpec = mujoco.MjSpec.from_file(body_path)
-        efg_main = child.find_body(body_name)
-        site:mujoco.MjsSite = parent.find_site(site_name)
+        efg_main = child.body(body_name)
+        site:mujoco.MjsSite = parent.site(site_name)
 
         site.attach_body(efg_main, prefix=f'{site_name}-')
 
