@@ -79,3 +79,12 @@ venv.bak/
 
 # vim swap
 *.swp
+
+# dump images
+/*.png
+
+# mujoco log
+MUJOCO_LOG.TXT
+
+# dev
+/dev/
