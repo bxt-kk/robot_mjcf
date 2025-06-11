@@ -1,0 +1,34 @@
+<mujoco model="sugar_box">
+  <visual>
+    <headlight ambient="0 0 0" diffuse="0 0 0" specular="1 1 1"/>
+    <quality shadowsize="8192"/>
+  </visual>
+
+  <asset>
+    <texture name="box" file="texture_map.png" type="2d"/>
+    <material name="box" texture="box" specular="1" shininess="1"/>
+    <mesh file="textured_simple.obj" scale="1 1 1"/>
+    <mesh file="collision.obj" scale="1 1 1"/>
+    <material name="floor" reflectance=".1"/>
+  </asset>
+
+  <default>
+    <default class="visual">
+      <geom type="mesh" group="1" contype="0" conaffinity="0"/>
+    </default>
+    <default class="collision">
+      <geom type="mesh" group="3"/>
+    </default>
+  </default>
+
+  <worldbody>
+    <light pos=".4 -.4 .3" dir="-2 2 -1.5" diffuse=".6 .6 .6"/>
+    <light pos="-.2 -.4 .3" dir="1 2 -1.5" diffuse=".6 .6 .6"/>
+    <geom type="plane" size="5 5 .01" rgba="1 1 1 1" material="floor"/>
+    <body name="sugar_box">
+      <freejoint/>
+      <geom mesh="textured_simple" material="box" class="visual"/>
+	  <geom mesh="collision" class="collision"/>
+    </body>
+  </worldbody>
+</mujoco>

@@ -1,0 +1,33 @@
+<mujoco model="master_chef_can">
+  <visual>
+    <headlight ambient="0 0 0" diffuse="0 0 0" specular="1 1 1"/>
+    <quality shadowsize="8192"/>
+  </visual>
+
+  <asset>
+    <texture name="can" file="texture_map.png" type="2d"/>
+    <material name="can" texture="can" specular="1" shininess="1"/>
+    <mesh file="textured_simple.obj" scale="1 1 1"/>
+    <material name="floor" reflectance=".1"/>
+  </asset>
+
+  <default>
+    <default class="visual">
+      <geom type="mesh"  group="1" contype="0" conaffinity="0"/>
+    </default>
+    <default class="collision">
+      <geom type="mesh" group="3" mass="0"/>
+    </default>
+  </default>
+
+  <worldbody>
+    <light pos=".4 -.4 .3" dir="-2 2 -1.5" diffuse=".6 .6 .6"/>
+    <light pos="-.2 -.4 .3" dir="1 2 -1.5" diffuse=".6 .6 .6"/>
+    <geom type="plane" size="5 5 .01" rgba="1 1 1 1" material="floor"/>
+    <body name="master_chef_can">
+      <freejoint/>
+      <geom mesh="textured_simple" material="can" mass="0.5" class="visual"/>
+	  <geom type="cylinder" size="0.051 0.07" pos="0 0 -0.0035" class="collision"/>
+    </body>
+  </worldbody>
+</mujoco>
