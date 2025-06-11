@@ -1,0 +1,72 @@
+<mujoco model="pitcher_base">
+  <visual>
+    <headlight ambient="0 0 0" diffuse="0 0 0" specular="1 1 1"/>
+    <quality shadowsize="8192"/>
+  </visual>
+
+  <asset>
+    <texture name="pitcher_base" file="texture_map.png" type="2d"/>
+    <material name="pitcher_base" texture="pitcher_base" specular="1" shininess="1"/>
+    <mesh file="textured_simple.obj" scale="1 1 1"/>
+    <mesh file="collision000.obj" scale="1 1 1"/>
+    <mesh file="collision001.obj" scale="1 1 1"/>
+    <mesh file="collision002.obj" scale="1 1 1"/>
+    <mesh file="collision003.obj" scale="1 1 1"/>
+    <mesh file="collision004.obj" scale="1 1 1"/>
+    <mesh file="collision005.obj" scale="1 1 1"/>
+    <mesh file="collision006.obj" scale="1 1 1"/>
+    <mesh file="collision007.obj" scale="1 1 1"/>
+    <mesh file="collision008.obj" scale="1 1 1"/>
+    <mesh file="collision009.obj" scale="1 1 1"/>
+    <mesh file="collision010.obj" scale="1 1 1"/>
+    <mesh file="collision011.obj" scale="1 1 1"/>
+    <mesh file="collision012.obj" scale="1 1 1"/>
+    <mesh file="collision013.obj" scale="1 1 1"/>
+    <mesh file="collision014.obj" scale="1 1 1"/>
+    <mesh file="collision015.obj" scale="1 1 1"/>
+    <mesh file="collision016.obj" scale="1 1 1"/>
+    <mesh file="collision017.obj" scale="1 1 1"/>
+    <mesh file="collision018.obj" scale="1 1 1"/>
+    <mesh file="collision019.obj" scale="1 1 1"/>
+    <material name="floor" reflectance=".1"/>
+  </asset>
+
+  <default>
+    <default class="visual">
+      <geom type="mesh" group="1" contype="0" conaffinity="0"/>
+    </default>
+    <default class="collision">
+      <geom type="mesh" group="3" mass="0"/>
+    </default>
+  </default>
+
+  <worldbody>
+    <light pos=".4 -.4 .3" dir="-2 2 -1.5" diffuse=".6 .6 .6"/>
+    <light pos="-.2 -.4 .3" dir="1 2 -1.5" diffuse=".6 .6 .6"/>
+    <geom type="plane" size="5 5 .01" rgba="1 1 1 1" material="floor"/>
+    <body name="pitcher_base">
+      <freejoint/>
+      <geom mesh="textured_simple" material="pitcher_base" class="visual"/>
+	  <geom mesh="collision000" class="collision"/>
+	  <geom mesh="collision001" class="collision"/>
+	  <geom mesh="collision002" class="collision"/>
+	  <geom mesh="collision003" class="collision"/>
+	  <geom mesh="collision004" class="collision"/>
+	  <geom mesh="collision005" class="collision"/>
+	  <geom mesh="collision006" class="collision"/>
+	  <geom mesh="collision007" class="collision"/>
+	  <geom mesh="collision008" class="collision"/>
+	  <geom mesh="collision009" class="collision"/>
+	  <geom mesh="collision010" class="collision"/>
+	  <geom mesh="collision011" class="collision"/>
+	  <geom mesh="collision012" class="collision"/>
+	  <geom mesh="collision013" class="collision"/>
+	  <geom mesh="collision014" class="collision"/>
+	  <geom mesh="collision015" class="collision"/>
+	  <geom mesh="collision016" class="collision"/>
+	  <geom mesh="collision017" class="collision"/>
+	  <geom mesh="collision018" class="collision"/>
+	  <geom mesh="collision019" class="collision"/>
+    </body>
+  </worldbody>
+</mujoco>
