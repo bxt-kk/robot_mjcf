@@ -1,0 +1,123 @@
+<mujoco model="elfin5">
+  <compiler angle="radian" meshdir="assets" autolimits="true"/>
+  <option cone="elliptic" impratio="10"/>
+  <option integrator="implicitfast"/>
+
+  <default>
+    <default class="elfin5">
+      <material specular="0.5" shininess="0.25"/>
+      <joint axis="0 0 1" range="-3.14 3.14" armature="0.1"/>
+      <position ctrlrange="-3.14 3.14"/>
+      <general biastype="affine" ctrlrange="-3.14 3.14" gainprm="5000" biasprm="0 -5000 -500"/>
+      <default class="size4">
+        <joint damping="10"/>
+        <general forcerange="-200 200"/>
+        <default class="size4_235">
+          <joint range="-2.35 2.35"/>
+          <general ctrlrange="-2.35 2.35"/>
+        </default>
+        <default class="size4_261">
+          <joint range="-2.61 2.61"/>
+          <general ctrlrange="-2.61 2.61"/>
+        </default>
+      </default>
+      <default class="size3">
+        <joint damping="5"/>
+        <general forcerange="-104 104"/>
+      </default>
+      <default class="size2">
+        <joint damping="2"/>
+        <general forcerange="-34 34"/>
+        <default class="size2_256">
+          <joint range="-2.56 2.56"/>
+          <general ctrlrange="-2.56 2.56"/>
+        </default>
+      </default>
+      <default class="visual">
+        <geom type="mesh" contype="0" conaffinity="0" group="2"/>
+      </default>
+      <default class="collision">
+        <geom type="mesh" group="3"/>
+        <default class="eef_collision">
+          <geom type="cylinder"/>
+        </default>
+      </default>
+      <site size="0.001" rgba="0.5 0.5 0.5 0.3" group="4"/>
+    </default>
+  </default>
+
+  <asset>
+    <material class="elfin5" name="black" rgba="0.033 0.033 0.033 1"/>
+    <material class="elfin5" name="jointgray" rgba="0.278 0.278 0.278 1"/>
+    <material class="elfin5" name="linkgray" rgba="0.82 0.82 0.82 1"/>
+    <material class="elfin5" name="urblue" rgba="0.49 0.678 0.8 1"/>
+
+    <mesh file="elfin_base.obj"/>
+    <mesh file="elfin_link1.obj"/>
+    <mesh file="elfin_link2.obj"/>
+    <mesh file="elfin_link3.obj"/>
+    <mesh file="elfin_link4.obj"/>
+    <mesh file="elfin_link5.obj"/>
+    <mesh file="elfin_link6.obj"/>
+  </asset>
+
+  <worldbody>
+    <light name="spotlight" mode="targetbodycom" target="elfin_link5" pos="0 -1 2"/>
+    <body name="elfin_base" pos="0 0 0" quat="1 0 0 -1" childclass="elfin5">
+      <inertial mass="2.13370989" pos="0.00022102 0.0013404 0.025529" diaginertia="0.0041550303 0.0040358799 0.0070803951"/>
+      <geom mesh="elfin_base" material="linkgray" class="visual"/>
+	  <!-- <geom name="elfin/base" mesh="elfin_base" class="collision"/> -->
+      <body name="elfin_link1" pos="0 0 0.0735">
+        <inertial pos="-0.021815 -1.1609E-05 0.095394" mass="7.96222548" diaginertia="0.0222824535 0.0401380494 0.0473608317"/>
+        <joint name="shoulder_pan_joint" class="size4" axis="0 0 1"/>
+        <geom mesh="elfin_link1" material="jointgray" class="visual"/>
+		<geom name="elfin/link1" mesh="elfin_link1" class="collision"/>
+		<geom name="base_pan" class="collision" type="cylinder" size="0.08 0.036" pos="0 0 -0.036"/>
+        <body name="elfin_link2" pos="-0.078 0 0.1465" euler="1.3734 -1.5708 -1.5708">
+          <inertial pos="-0.15508 0.031021 0.052499" mass="3.73459563" diaginertia="0.0051960204 0.091957473 0.0909910446"/>
+          <joint name="shoulder_lift_joint" class="size4_235" axis="0 0 1"/>
+          <geom mesh="elfin_link2" material="linkgray" class="visual"/>
+		  <geom name="elfin/link2" mesh="elfin_link2" class="collision"/>
+          <body name="elfin_link3" pos="-0.37262 0.074541 -0.0060028" euler="0 0 1.3734">
+            <inertial pos="1.1184E-05 0.041481 -0.052586" mass="4.71497847" diaginertia="0.0163101015 0.0098219049 0.0201630843"/>
+            <joint name="elbow_joint" class="size4_261" axis="0 0 -1"/>
+            <geom mesh="elfin_link3" material="jointgray" class="visual"/>
+			<geom name="elfin/link3" mesh="elfin_link3" class="collision"/>
+            <body name="elfin_link4" pos="0 0.119 -0.072" euler="-1.5708 0 1.5708">
+              <inertial pos="-0.058961 3.7945E-05 0.13807" mass="1.46783034"
+                diaginertia="0.0167614269 0.0187714101 0.004072002"/>
+              <joint name="wrist_1_joint" class="size3" axis="0 0 1"/>
+              <geom mesh="elfin_link4" material="linkgray" class="visual"/>
+			  <geom name="elfin/link4" mesh="elfin_link4" class="collision"/>
+              <body name="elfin_link5" pos="-0.0605 0 0.301" euler="0 -1.5708 1.5708">
+                <inertial pos="3.4043E-06 -0.036593 -0.044531" mass="2.49795291"
+                  diaginertia="0.0060069291 0.0034992705 0.0076218249"/>
+                <joint name="wrist_2_joint" class="size2_256" axis="0 0 -1"/>
+				<geom mesh="elfin_link5" material="jointgray" class="visual"/>
+				<geom name="elfin/link5" mesh="elfin_link5" class="collision"/>
+                <body name="elfin_link6" pos="0 -0.1005 -0.0605" euler="1.5708 0 -1.5708">
+                  <inertial pos="-0.007255 -3.2028E-05 0.033062" mass="0.45519408"
+                    diaginertia="0.0005996763 0.0006024264 0.0006053928"/>
+                  <joint name="wrist_3_joint" class="size2" axis="0 0 1"/>
+                  <geom mesh="elfin_link6" material="linkgray" class="visual"/>
+				  <geom name="elfin/link6" mesh="elfin_link6" class="collision"/>
+                  <site name="attachment_site" pos="0 0 0.054"/>
+                </body>
+              </body>
+            </body>
+          </body>
+        </body>
+      </body>
+    </body>
+  </worldbody>
+
+  <actuator>
+    <general class="size4" name="shoulder_pan" joint="shoulder_pan_joint"/>
+    <general class="size4_235" name="shoulder_lift" joint="shoulder_lift_joint"/>
+    <general class="size4_261" name="elbow" joint="elbow_joint"/>
+    <general class="size3" name="wrist_1" joint="wrist_1_joint"/>
+    <general class="size2_256" name="wrist_2" joint="wrist_2_joint"/>
+    <general class="size2" name="wrist_3" joint="wrist_3_joint"/>
+  </actuator>
+
+</mujoco>
