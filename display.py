@@ -15,6 +15,7 @@ def display(
         inertia:       bool=False,
         contact_force: bool=False,
         show_camera:   bool=False,
+        sky_box:       bool=False,
         camera:        int | str=-1,
         render_size:   tuple[int, int]=(640, 360),
         depthes:       tuple[float, float, float]=(9., 3., 1.),
@@ -81,8 +82,8 @@ def display(
     with mujoco.viewer.launch_passive(m, d, key_callback=key_callback) as viewer:
         viewer.user_scn.flags[mujoco.mjtRndFlag.mjRND_SHADOW] = False
         viewer.user_scn.flags[mujoco.mjtRndFlag.mjRND_REFLECTION] = False
-        viewer.user_scn.flags[mujoco.mjtRndFlag.mjRND_SKYBOX] = False
         viewer.user_scn.flags[mujoco.mjtRndFlag.mjRND_HAZE] = False
+        viewer.user_scn.flags[mujoco.mjtRndFlag.mjRND_SKYBOX] = sky_box
         viewer.opt.flags[mujoco.mjtVisFlag.mjVIS_INERTIA] = inertia
         viewer.opt.flags[mujoco.mjtVisFlag.mjVIS_CONTACTFORCE] = contact_force
         viewer.opt.flags[mujoco.mjtVisFlag.mjVIS_CAMERA] = show_camera
