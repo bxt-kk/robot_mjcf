@@ -1,0 +1,127 @@
+<mujoco model="efg-c80_d435">
+  <compiler angle="radian" meshdir="assets" autolimits="true"/>
+  <option cone="elliptic" impratio="10"/>
+  <option integrator="implicitfast"/>
+
+  <default>
+    <default class="efgc80">
+      <material specular="0.5" shininess="0.25"/>
+	  <joint type="slide" axis="1 0 0" range="0 0.041"
+	    armature="0.001" damping="0.1" solimplimit="0.95 0.99 0.001" solreflimit="0.005 1"/>
+	  <general biastype="affine" ctrlrange="0 0.041" forcerange="-150 150"/>
+      <default class="visual">
+        <geom type="mesh" contype="0" conaffinity="0" group="2"/>
+      </default>
+      <default class="collision">
+        <geom mass="1e-6" type="mesh" group="3"/>
+		<default class="collision_fa">
+		  <geom type="box" size="0.003 0.013 0.005" pos="0 0 -0.005"
+		    friction="0.7" solimp="0.95 0.99 0.001" solref="0.004 1" priority="1"/>
+        </default>
+		<default class="collision_fb">
+		  <geom type="box" size="0.003 0.013 0.015" pos="0 0 -0.026"
+		    friction="0.6" solimp="0.95 0.99 0.001" solref="0.004 1" priority="1"/>
+        </default>
+      </default>
+    </default>
+  </default>
+
+  <asset>
+    <material class="efgc80" name="black" rgba="0.033 0.033 0.033 1"/>
+    <material class="efgc80" name="jointgray" rgba="0.278 0.278 0.278 1"/>
+    <material class="efgc80" name="linkgray" rgba="0.82 0.82 0.82 1"/>
+    <material class="efgc80" name="urblue" rgba="0.49 0.678 0.8 1"/>
+    <mesh file="efg-c80_main.obj"/>
+    <mesh file="efg-c80_lock02.obj"/>
+    <mesh file="efg-c80_finger02.obj"/>
+    <mesh file="efg-c80_finger_c01.obj"/>
+    <mesh file="efg-c80_finger_c02.obj"/>
+    <mesh file="efg-c80_d435.obj"/>
+    <mesh file="efg-c80_d435_holder.obj"/>
+  </asset>
+
+  <worldbody>
+    <light mode="targetbodycom" target="hand" pos="0 -1 2"/>
+    <body name="hand" pos="0 0 0">
+	  <camera name="d435" pos="0 -0.0525 0.0585" xyaxes="1 0 0 0 -1 0"/>
+      <inertial mass="1.5" pos="0 0 0.0485" diaginertia="0.0023 0.002 0.0019"/>
+	  <geom mesh="efg-c80_main" material="jointgray" class="visual"/>
+	  <geom mesh="efg-c80_d435" material="linkgray" class="visual"/>
+	  <geom mesh="efg-c80_d435_holder" material="linkgray" class="visual"/>
+	  <geom mesh="efg-c80_main" class="collision"/>
+	  <geom mesh="efg-c80_d435" class="collision"/>
+	  <geom mesh="efg-c80_d435_holder" class="collision"/>
+      <body name="finger01" pos="0 0 0.081">
+        <joint name="finger01_joint" class="efgc80"/>
+	    <geom mesh="efg-c80_lock02" material="jointgray" class="visual"/>
+	    <geom mesh="efg-c80_finger02" material="urblue" class="visual"/>
+	    <geom mesh="efg-c80_lock02" class="collision"/>
+		<body name="finger01_bar">
+	      <geom mesh="efg-c80_finger_c01" class="collision"/>
+		</body>
+		<body name="finger01_link">
+	      <geom mesh="efg-c80_finger_c02" class="collision"/>
+		</body>
+		<body name="pad01" pos="-0.0445 -0.002 0.06">
+		  <!-- <geom type="box" size="0.003 0.013 0.005" pos="0 0 -0.005" class="visual"/> -->
+		  <!-- <geom type="box" size="0.003 0.013 0.015" pos="0 0 -0.026" class="visual"/> -->
+	      <geom class="collision_fa"/>
+	      <geom class="collision_fb"/>
+		</body>
+      </body>
+      <body name="finger02" pos="0 0 0.081" quat="0 0 0 1">
+        <joint name="finger02_joint" class="efgc80"/>
+	    <geom mesh="efg-c80_lock02" material="jointgray" class="visual"/>
+	    <geom mesh="efg-c80_finger02" material="urblue" class="visual"/>
+	    <geom mesh="efg-c80_lock02" class="collision"/>
+		<body name="finger02_bar">
+	      <geom mesh="efg-c80_finger_c01" class="collision"/>
+		</body>
+		<body name="finger02_link">
+	      <geom mesh="efg-c80_finger_c02" class="collision"/>
+		</body>
+		<body name="pad02" pos="-0.0445 -0.002 0.06">
+	      <geom class="collision_fa"/>
+	      <geom class="collision_fb"/>
+		</body>
+      </body>
+    </body>
+	<body name="test_cube">
+	  <joint type="free"/>
+	  <geom type="box"  pos="0. 0 0.5" size="0.02 0.02 0.05" rgba="1 0 0 1"/>
+	</body>
+  </worldbody>
+
+  <contact>
+    <exclude body1="hand" body2="finger01"/>
+    <exclude body1="hand" body2="finger02"/>
+
+    <exclude body1="finger01" body2="finger01_link"/>
+    <exclude body1="finger01_link" body2="finger01_bar"/>
+    <exclude body1="finger01_link" body2="pad01"/>
+    <exclude body1="finger01_bar" body2="pad01"/>
+
+    <exclude body1="finger02" body2="finger02_link"/>
+    <exclude body1="finger02_link" body2="finger02_bar"/>
+    <exclude body1="finger02_link" body2="pad02"/>
+    <exclude body1="finger02_bar" body2="pad02"/>
+  </contact>
+
+  <tendon>
+    <fixed name="split">
+      <joint joint="finger01_joint" coef="0.5"/>
+      <joint joint="finger02_joint" coef="0.5"/>
+    </fixed>
+  </tendon>
+
+  <equality>
+    <joint name="efg-c80_fingers" joint1="finger01_joint" joint2="finger02_joint"
+	  polycoef="0 1 0 0 0" solimp="0.95 0.99 0.001" solref="0.005 1"/>
+  </equality>
+
+  <actuator>
+	<general class="efgc80" name="finger_actuator" tendon="split"
+	  ctrlrange="0 255" gainprm="0.48235294117647054 0 0" biasprm="0 -3000 -300" dynprm="0.3"/>
+  </actuator>
+
+</mujoco>
