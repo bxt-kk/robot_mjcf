@@ -15,11 +15,11 @@
       <default class="collision">
         <geom mass="1e-6" type="mesh" group="3"/>
 		<default class="collision_fa">
-		  <geom type="box" size="0.003 0.013 0.005" pos="0 0 -0.005"
+		  <geom type="box" size="0.0025 0.013 0.005" pos="0 0 -0.005"
 		    friction="0.7" solimp="0.95 0.99 0.001" solref="0.004 1" priority="1"/>
         </default>
 		<default class="collision_fb">
-		  <geom type="box" size="0.003 0.013 0.015" pos="0 0 -0.026"
+		  <geom type="box" size="0.0025 0.013 0.015" pos="0 0 -0.026"
 		    friction="0.6" solimp="0.95 0.99 0.001" solref="0.004 1" priority="1"/>
         </default>
       </default>
@@ -55,9 +55,9 @@
 		<body name="finger01_link">
 	      <geom mesh="efg-c80_finger_c02" class="collision"/>
 		</body>
-		<body name="pad01" pos="-0.0445 -0.002 0.06">
-		  <!-- <geom type="box" size="0.003 0.013 0.005" pos="0 0 -0.005" class="visual"/> -->
-		  <!-- <geom type="box" size="0.003 0.013 0.015" pos="0 0 -0.026" class="visual"/> -->
+		<body name="pad01" pos="-0.044 -0.002 0.06">
+		  <!-- <geom type="box" size="0.0025 0.013 0.005" pos="0 0 -0.005" class="visual"/> -->
+		  <!-- <geom type="box" size="0.0025 0.013 0.015" pos="0 0 -0.026" class="visual"/> -->
 	      <geom class="collision_fa"/>
 	      <geom class="collision_fb"/>
 		</body>
@@ -73,7 +73,7 @@
 		<body name="finger02_link">
 	      <geom mesh="efg-c80_finger_c02" class="collision"/>
 		</body>
-		<body name="pad02" pos="-0.0445 -0.002 0.06">
+		<body name="pad02" pos="-0.044 -0.002 0.06">
 	      <geom class="collision_fa"/>
 	      <geom class="collision_fb"/>
 		</body>
