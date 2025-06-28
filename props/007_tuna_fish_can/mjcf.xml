@@ -1,11 +1,12 @@
 <mujoco model="tuna_fish_can">
+  <compiler meshdir="assets"/>
   <visual>
     <headlight ambient="0 0 0" diffuse="0 0 0" specular="1 1 1"/>
     <quality shadowsize="8192"/>
   </visual>
 
   <asset>
-    <texture name="can" file="texture_map.png" type="2d"/>
+	<texture name="can" file="assets/texture_map.png" type="2d"/>
     <material name="can" texture="can" specular="1" shininess="1"/>
     <mesh file="textured_simple.obj" scale="1 1 1"/>
     <material name="floor" reflectance=".1"/>

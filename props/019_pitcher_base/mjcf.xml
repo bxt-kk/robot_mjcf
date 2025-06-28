@@ -1,11 +1,12 @@
 <mujoco model="pitcher_base">
+  <compiler meshdir="assets"/>
   <visual>
     <headlight ambient="0 0 0" diffuse="0 0 0" specular="1 1 1"/>
     <quality shadowsize="8192"/>
   </visual>
 
   <asset>
-    <texture name="pitcher_base" file="texture_map.png" type="2d"/>
+	<texture name="pitcher_base" file="assets/texture_map.png" type="2d"/>
     <material name="pitcher_base" texture="pitcher_base" specular="1" shininess="1"/>
     <mesh file="textured_simple.obj" scale="1 1 1"/>
     <mesh file="collision000.obj" scale="1 1 1"/>

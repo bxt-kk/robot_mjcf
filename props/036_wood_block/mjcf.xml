@@ -1,11 +1,12 @@
 <mujoco model="wood_block">
+  <compiler meshdir="assets"/>
   <visual>
     <headlight ambient="0 0 0" diffuse="0 0 0" specular="1 1 1"/>
     <quality shadowsize="8192"/>
   </visual>
 
   <asset>
-    <texture name="wood_block" file="texture_map.png" type="2d"/>
+	<texture name="wood_block" file="assets/texture_map.png" type="2d"/>
     <material name="wood_block" texture="wood_block" specular="1" shininess="1"/>
     <mesh file="textured_simple.obj" scale="1 1 1"/>
     <mesh file="collision.obj" scale="1 1 1"/>

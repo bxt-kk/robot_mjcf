@@ -1,11 +1,12 @@
 <mujoco model="bleach_cleanser">
+  <compiler meshdir="assets"/>
   <visual>
     <headlight ambient="0 0 0" diffuse="0 0 0" specular="1 1 1"/>
     <quality shadowsize="8192"/>
   </visual>
 
   <asset>
-    <texture name="bleach_cleanser" file="texture_map.png" type="2d"/>
+	<texture name="bleach_cleanser" file="assets/texture_map.png" type="2d"/>
     <material name="bleach_cleanser" texture="bleach_cleanser" specular="1" shininess="1"/>
     <mesh file="textured_simple.obj" scale="1 1 1"/>
     <mesh file="collision000.obj" scale="1 1 1"/>
