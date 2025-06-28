@@ -19,6 +19,7 @@ def display(
         camera:        int | str=-1,
         render_size:   tuple[int, int]=(640, 360),
         depthes:       tuple[float, float, float]=(9., 3., 1.),
+        print_xml:     bool=False,
     ):
 
     parent:mujoco.MjSpec = mujoco.MjSpec.from_file(path)
@@ -35,6 +36,8 @@ def display(
 
     m = parent.compile()
     d = mujoco.MjData(m)
+    if print_xml:
+        print(parent.to_xml())
 
     m.vis.scale.contactwidth = 0.1
     m.vis.scale.contactheight = 0.03
